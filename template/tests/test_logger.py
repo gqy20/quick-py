@@ -32,7 +32,7 @@ class TestLoggerSetup:
         assert len(logger.handlers) == 2  # 控制台和文件处理器
 
         # 检查日志文件是否已创建
-        log_file = tmp_path / "{{project_slug }}.log"
+        log_file = tmp_path / "test.log"
         assert log_file.exists()
 
     def test_setup_logger_no_file(self):
