@@ -144,25 +144,21 @@ _message_after_copy: |
   1. 进入项目目录：
      $ cd {{ _copier_conf.dst_path }}
 
-  2. 创建虚拟环境：
-     $ uv venv
-     $ source .venv/bin/activate  # Windows: .venv\Scripts\activate
+  2. 创建虚拟环境并安装依赖：
+     $ make install
 
-  3. 安装依赖：
-     $ uv pip install -e ".[dev]"
+  3. 安装 pre-commit 钩子：
+     $ .venv/bin/pre-commit install
 
-  4. 安装 pre-commit 钩子：
-     $ pre-commit install
+  4. 运行代码检查：
+     $ make check
 
-  5. 运行代码检查：
-     $ python scripts/check.py
-
-  6. 运行测试：
-     $ pytest
+  5. 运行测试：
+     $ make test
 
   {% if add_api -%}
-  7. 启动 FastAPI 服务器（可选）：
-     $ python -m {{ package_name }}.api
+  6. 启动 FastAPI 服务器（可选）：
+     $ .venv/bin/python -m {{ package_name }}.api
   {% endif -%}
 
   ============================================================

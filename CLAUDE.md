@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-**Python Kit** 是一个 Python 标准项目模板，使用 [Copier](https://copier.readthedocs.io/) 生成规范化的 Python 项目。它不是一个可安装的包，而是一个可供复制和自定义的项目模板。
+**quick-py** 是一个 Python 项目模板，使用 [Copier](https://copier.readthedocs.io/) 生成规范化的 Python 项目。它不是一个可安装的包，而是一个可供复制和自定义的项目模板。
 
 **关键特性：**
 - 使用 `uv` 进行极快的包管理（比 pip 快 10-100 倍）
@@ -12,6 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 统一使用 ruff 进行代码检查和格式化
 - 基于 Rich 的美观日志系统
 - FastAPI Web 开发示例（可选）
+- Hatchling 构建后端
 
 ## 模板开发（模板维护者）
 
@@ -19,18 +20,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # 在模板根目录工作
-cd /path/to/py_kit
+cd /path/to/quick-py
 
 # 模板变量定义在 copier.yml
 # 模板文件使用 Jinja2 语法，例如：
-# {{ cookiecutter.package_name }} - Python 包名
-# {{ cookiecutter.project_name }} - 项目名称
-# {% if cookiecutter.add_api %}...{% endif %} - 条件块
+# {{ package_name }} - Python 包名
+# {{ project_name }} - 项目名称
+# {% if add_api %}...{% endif %} - 条件块
 
 # 测试模板生成
 copier copy . /tmp/test-project
-
-# 更新 .copier-answers.yml 默认值
 ```
 
 ## 用户使用（模板使用者）
@@ -38,21 +37,21 @@ copier copy . /tmp/test-project
 ### 创建新项目
 ```bash
 # 使用模板创建项目
-copier copy https://github.com/gqy22/py_kit my-project
+copier copy gh:gqy20/quick-py my-project
 cd my-project
 ```
 
 ### 环境设置
 ```bash
-# 创建虚拟环境
-uv venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+# 一键创建虚拟环境并安装依赖
+make install
 
-# 安装项目及开发依赖
-uv pip install -e ".[dev]"
+# 或者手动执行
+uv venv
+.venv/bin/python -m uv pip install -e ".[dev]"
 
 # 安装 pre-commit 钩子
-pre-commit install
+.venv/bin/pre-commit install
 ```
 
 ### 代码质量检查
@@ -92,7 +91,23 @@ python -m my_package.main    # 查看所有功能演示
 
 ## 代码架构
 
-### 目录结构（生成后）
+### 模板目录结构（维护者视角）
+```
+quick-py/
+├── copier.yml                # Copier 模板配置（核心）
+├── .copier-answers.yml.jinja # 答案模板
+├── template/                 # 模板子目录（生成的项目源）
+│   ├── src/{{package_name}}/ # 源代码模板
+│   ├── tests/                # 测试文件模板
+│   ├── .github/workflows/    # CI/CD 配置模板
+│   ├── scripts/              # 工具脚本
+│   ├── docs/                 # 文档模板
+│   ├── pyproject.toml        # 项目配置模板
+│   └── Makefile              # Make 命令
+└── .github/workflows/test.yml # 模板自身测试
+```
+
+### 生成的项目结构
 ```
 src/my_package/
 ├── __init__.py    # 包初始化，导出公共 API
@@ -101,6 +116,12 @@ src/my_package/
 ├── api.py         # FastAPI 应用示例（可选）
 └── main.py        # 主程序入口
 ```
+
+### 核心 CI/CD 工作流
+- `ci.yml` - 持续集成（push/PR 时运行检查和测试）
+- `publish.yml` - PyPI 发布（推送标签时触发）
+- `release.yml` - GitHub Release（创建发布说明）
+- `dependabot.yml` - 依赖自动更新
 
 ### 核心模块
 
@@ -115,7 +136,16 @@ src/my_package/
 - 统一响应格式：`{"code": 0, "data": {}, "message": "成功"}`
 - RESTful 风格路由：`/api/v1/` 前缀
 - 完整的错误处理和日志记录
-- 使用 `{% if cookiecutter.add_api %}` 条件块包含
+- 使用 `{% if add_api %}` 条件块包含
+
+**API 端点：**
+- `GET /` - 欢迎信息
+- `GET /api/v1/health` - 健康检查
+- `GET /api/v1/users/{user_id}` - 获取用户
+- `POST /api/v1/users` - 创建用户
+- `PUT /api/v1/users/{user_id}` - 更新用户
+- `DELETE /api/v1/users/{user_id}` - 删除用户
+- `GET /api/v1/users` - 用户列表（分页）
 
 ### 导出公共 API
 新增模块时，在 `src/my_package/__init__.py` 中导出需要公开的 API。
@@ -142,36 +172,39 @@ src/my_package/
 | `author_email` | 作者邮箱 | your.email@example.com |
 | `description` | 项目描述 | A short description |
 | `version` | 初始版本 | 0.1.0 |
-| `python_version` | Python 版本 | 3.13 |
+| `python_version` | Python 版本 (3.11/3.12/3.13) | 3.13 |
 | `license` | 开源协议 | MIT |
 | `add_api` | 添加 FastAPI | true |
 | `add_cli` | 添加 CLI | false |
 | `line_length` | 代码行长度 | 88 |
+| `repository_provider` | 仓库提供商 | https://github.com |
+| `repository_username` | 仓库用户名 | 自动生成 |
+| `copyright_date` | 版权年份 | 当前年份 |
 
 ## 模板开发规范
 
 ### 文件命名
-- 源代码目录使用 `src/{{cookiecutter.package_name}}/`
-- 测试文件使用 `tests/test_{{cookiecutter.package_name}}.py`
+- 源代码目录使用 `src/{{package_name}}/`
+- 测试文件使用 `tests/test_{{package_name}}.py`
 
 ### Jinja2 语法
 ```python
 # 变量替换
-{{ cookiecutter.package_name }}
+{{ package_name }}
 
 # 条件块
-{% if cookiecutter.add_api -%}
+{% if add_api -%}
 from fastapi import FastAPI
 {% endif %}
 
 # 默认值处理
-{{ cookiecutter.project_name | default("My Project") }}
+{{ project_name | default("My Project") }}
 ```
 
 ### 避免硬编码
-- 所有包名引用使用 `{{cookiecutter.package_name}}`
-- 所有项目 slug 使用 `{{cookiecutter.project_slug}}`
-- 日志文件名使用 `{{cookiecutter.project_slug}}.log`
+- 所有包名引用使用 `{{package_name}}`
+- 所有项目 slug 使用 `{{project_slug}}`
+- 日志文件名使用 `{{project_slug}}.log`
 
 ## Pre-commit 钩子
 
@@ -183,13 +216,30 @@ from fastapi import FastAPI
 - ruff --fix - 自动修复代码问题
 - ruff-format - 自动格式化代码
 
+## Make 命令
+
+```bash
+make venv      # 创建虚拟环境
+make install   # 创建虚拟环境并安装依赖
+make check     # 代码检查
+make format    # 格式化代码
+make test      # 运行测试
+make test-cov  # 测试 + 覆盖率
+make clean     # 清理缓存（包括虚拟环境）
+make all       # 检查 + 测试
+```
+
 ## 发布流程
 
 ```bash
 # 1. 更新版本号（src/my_package/__init__.py 和 pyproject.toml）
 # 2. 更新 docs/CHANGELOG.md
-# 3. 创建并推送标签
-git tag -a v0.2.0 -m "版本 0.2.0"
+# 3. 提交并推送
+git add .
+git commit -m "chore: bump version to 0.2.0"
+git push origin main
+# 4. 创建并推送标签
+git tag -a v0.2.0 -m "Release version 0.2.0"
 git push origin v0.2.0
 # GitHub Actions 自动创建 Release 和发布到 PyPI
 ```

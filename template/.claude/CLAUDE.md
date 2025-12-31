@@ -12,22 +12,21 @@
 ## 常用命令
 
 ```bash
-# 安装依赖
-uv pip install -e ".[dev]"
+# 创建虚拟环境并安装依赖
+make install
 
 # 代码检查
-ruff check .
-ruff check --fix .
+make check
 
 # 格式化
-ruff format .
+make format
 
 # 测试
-pytest
-pytest --cov=src/{{package_name }}
+make test
+make test-cov
 
-# 运行检查脚本
-python scripts/check.py
+# 运行所有检查
+make all
 ```
 
 ## 代码规范
@@ -43,10 +42,7 @@ python scripts/check.py
 
 ```bash
 # 启动 FastAPI 服务器
-python -m {{package_name }}.api
-
-# 或使用 uvicorn
-uvicorn {{package_name }}.api:app --reload
+.venv/bin/python -m {{package_name }}.api
 ```
 {% endif %}
 
