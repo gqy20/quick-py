@@ -1,6 +1,6 @@
 """测试包本身的基本属性。"""
 
-from py_kit import __version__, add, greet
+from {{package_name}} import __version__, add, greet
 
 
 def test_version():
