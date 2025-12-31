@@ -1,9 +1,9 @@
-# Python Kit
+# quick-py
 
 [![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-orange.json)](https://github.com/copier-org/copier)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 
-> 现代Python 项目模板 - 基于 Copier 模板生成器
+> 现代化 Python 项目模板 - 基于 Copier，秒级生成规范项目
 
 一个专业的 Python 项目脚手架模板，使用 [Copier](https://copier.readthedocs.io/) 生成规范化的 Python 项目。
 
@@ -32,11 +32,15 @@ uv pip install copier
 ### 创建项目
 
 ```bash
-# 从 GitHub 创建
-copier copy https://github.com/gqy22/py_kit my-project
+# 从 GitHub 创建（推荐）
+copier copy gh:gqy20/quick-py my-project
 
-# 从本地创建
-copier copy path/to/py_kit my-project
+# 或使用完整 URL
+copier copy https://github.com/gqy20/quick-py my-project
+
+# 或使用 pip 安装 copier 后从 GitHub 创建
+pip install copier
+copier copy gh:gqy20/quick-py my-project
 ```
 
 Copier 会交互式询问以下信息：
@@ -109,4 +113,8 @@ Copier 会智能合并更新，保留你的自定义修改。
 
 MIT
 
-Copyright © 2024 Your Name
+Copyright © 2024 gqy20
+
+---
+
+**GitHub:** https://github.com/gqy20/quick-py
