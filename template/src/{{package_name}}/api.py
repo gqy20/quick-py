@@ -13,7 +13,7 @@
 from contextlib import asynccontextmanager
 from datetime import datetime
 from enum import Enum
-from typing import Any, Optional
+from typing import Any
 
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.responses import JSONResponse
@@ -75,7 +75,7 @@ class ApiResponse(BaseModel):
     )
 
     code: int = Field(default=ResponseCode.SUCCESS, description="状态码，0 表示成功")
-    data: Optional[Any] = Field(default=None, description="响应数据")
+    data: Any | None = Field(default=None, description="响应数据")
     message: str = Field(default="成功", description="响应消息")
 
 
@@ -93,7 +93,7 @@ class UserCreate(BaseModel):
 
     name: str = Field(..., min_length=1, max_length=50, description="用户名")
     email: str = Field(..., description="邮箱地址")
-    age: Optional[int] = Field(None, ge=0, le=150, description="年龄")
+    age: int | None = Field(None, ge=0, le=150, description="年龄")
 
 
 class UserResponse(BaseModel):
@@ -114,7 +114,7 @@ class UserResponse(BaseModel):
     id: int = Field(..., description="用户 ID")
     name: str = Field(..., description="用户名")
     email: str = Field(..., description="邮箱地址")
-    age: Optional[int] = Field(None, description="年龄")
+    age: int | None = Field(None, description="年龄")
     created_at: datetime = Field(..., description="创建时间")
 
 
@@ -125,9 +125,9 @@ class UserUpdate(BaseModel):
         json_schema_extra={"example": {"name": "李四", "age": 30}}
     )
 
-    name: Optional[str] = Field(None, min_length=1, max_length=50, description="用户名")
-    email: Optional[str] = Field(None, description="邮箱地址")
-    age: Optional[int] = Field(None, ge=0, le=150, description="年龄")
+    name: str | None = Field(None, min_length=1, max_length=50, description="用户名")
+    email: str | None = Field(None, description="邮箱地址")
+    age: int | None = Field(None, ge=0, le=150, description="年龄")
 
 
 # ==================== 全局异常处理 ====================

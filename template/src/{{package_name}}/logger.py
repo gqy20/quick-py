@@ -2,7 +2,6 @@
 
 import logging
 from pathlib import Path
-from typing import Optional
 
 from rich.console import Console
 from rich.logging import RichHandler
@@ -27,8 +26,8 @@ def setup_logger(
     name: str = "{{package_name }}",
     level: int = LoggerConfig.DEFAULT_LEVEL,
     log_to_file: bool = True,
-    log_dir: Optional[Path] = None,
-    log_file: Optional[str] = None,
+    log_dir: Path | None = None,
+    log_file: str | None = None,
 ) -> logging.Logger:
     """
     设置带有 Rich 格式化和可选文件输出的日志记录器
