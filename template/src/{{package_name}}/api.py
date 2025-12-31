@@ -9,7 +9,7 @@
 - API 文档
 """
 
-{% if cookiecutter.add_api -%}
+{% if add_api -%}
 from contextlib import asynccontextmanager
 from datetime import datetime
 from enum import Enum
@@ -19,7 +19,7 @@ from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 
-from {{ cookiecutter.package_name }}.logger import get_logger
+from {{package_name }}.logger import get_logger
 
 # 获取日志记录器
 logger = get_logger(__name__)
@@ -40,8 +40,8 @@ async def lifespan(app: FastAPI):
 
 # 创建 FastAPI 应用
 app = FastAPI(
-    title="{{ cookiecutter.project_name }} API",
-    description="{{ cookiecutter.description }}",
+    title="{{project_name }} API",
+    description="{{description }}",
     version="1.0.0",
     docs_url="/api/v1/docs",
     redoc_url="/api/v1/redoc",
@@ -184,7 +184,7 @@ async def log_requests(request: Request, call_next):
 )
 async def root():
     """根路径端点。"""
-    return ApiResponse(data={"message": "欢迎使用 {{ cookiecutter.project_name }} API"})
+    return ApiResponse(data={"message": "欢迎使用 {{project_name }} API"})
 
 
 @app.get(

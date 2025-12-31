@@ -1,4 +1,4 @@
-"""{{ cookiecutter.package_name }} 核心功能模块"""
+"""{{package_name }} 核心功能模块"""
 
 
 def greet(name: str = "World") -> str:

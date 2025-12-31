@@ -1,8 +1,8 @@
-# {{ cookiecutter.project_name }} - Claude Code 指令
+# {{project_name }} - Claude Code 指令
 
 ## 项目概述
 
-- **Python 版本**: {{ cookiecutter.python_version }}+
+- **Python 版本**: {{python_version }}+
 - **包管理**: uv（极速包管理器）
 - **项目结构**: src layout
 - **代码规范**: ruff（检查 + 格式化）
@@ -24,7 +24,7 @@ ruff format .
 
 # 测试
 pytest
-pytest --cov=src/{{ cookiecutter.package_name }}
+pytest --cov=src/{{package_name }}
 
 # 运行检查脚本
 python scripts/check.py
@@ -38,26 +38,26 @@ python scripts/check.py
 4. **文档字符串**: Google 风格中文文档
 5. **提交规范**: feat/fix/docs/refactor/test/chore
 
-{% if cookiecutter.add_api -%}
+{% if add_api -%}
 ## API 开发
 
 ```bash
 # 启动 FastAPI 服务器
-python -m {{ cookiecutter.package_name }}.api
+python -m {{package_name }}.api
 
 # 或使用 uvicorn
-uvicorn {{ cookiecutter.package_name }}.api:app --reload
+uvicorn {{package_name }}.api:app --reload
 ```
 {% endif %}
 
 ## 项目结构
 
 ```
-src/{{ cookiecutter.package_name }}/
+src/{{package_name }}/
 ├── __init__.py    # 包初始化，导出公共 API
 ├── core.py        # 核心功能
 ├── logger.py      # 日志系统
-{% if cookiecutter.add_api -%}
+{% if add_api -%}
 ├── api.py         # FastAPI 应用
 {% endif %}
 └── main.py        # 主程序入口

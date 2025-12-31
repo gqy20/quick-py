@@ -13,7 +13,7 @@ test:
 	pytest
 
 test-cov:
-	pytest --cov=src/{{ cookiecutter.package_name }}
+	pytest --cov=src/{{ package_name }}
 
 clean:
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true

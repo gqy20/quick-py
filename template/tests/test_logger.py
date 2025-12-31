@@ -2,7 +2,7 @@
 
 import logging
 
-from {{ cookiecutter.package_name }}.logger import (
+from {{package_name }}.logger import (
     console,
     get_logger,
     print_error,
@@ -32,7 +32,7 @@ class TestLoggerSetup:
         assert len(logger.handlers) == 2  # 控制台和文件处理器
 
         # 检查日志文件是否已创建
-        log_file = tmp_path / "{{ cookiecutter.project_slug }}.log"
+        log_file = tmp_path / "{{project_slug }}.log"
         assert log_file.exists()
 
     def test_setup_logger_no_file(self):
@@ -64,7 +64,7 @@ class TestLoggerSetup:
         logger.critical("严重消息")
 
         # 检查日志文件是否包含所有消息
-        log_file = tmp_path / "{{ cookiecutter.project_slug }}.log"
+        log_file = tmp_path / "{{project_slug }}.log"
         content = log_file.read_text()
         assert "调试消息" in content
         assert "信息消息" in content

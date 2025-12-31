@@ -1,10 +1,10 @@
 """API 模块的测试用例。"""
 
-{% if cookiecutter.add_api -%}
+{% if add_api -%}
 import pytest
 from fastapi.testclient import TestClient
 
-from {{ cookiecutter.package_name }}.api import app
+from {{package_name }}.api import app
 
 # 创建测试客户端
 client = TestClient(app)

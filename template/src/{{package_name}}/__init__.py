@@ -1,6 +1,6 @@
-"""{{ cookiecutter.package_name }}"""
+"""{{package_name }}"""
 
-__version__ = "{{ cookiecutter.version }}"
+__version__ = "{{version }}"
 
 from .core import add, greet
 from .logger import (
@@ -16,7 +16,7 @@ from .logger import (
     setup_logger,
 )
 
-{% if cookiecutter.add_api -%}
+{% if add_api -%}
 # API 模块作为可选导入（需要安装 fastapi）
 try:
     from .api import app as api_app
@@ -38,5 +38,5 @@ __all__ = [
     "print_info",
     "print_header",
     "print_section",
-    {% if cookiecutter.add_api -%}"api_app"{% endif %},
+    {% if add_api -%}"api_app"{% endif %},
 ]

@@ -1,9 +1,9 @@
-# {{ cookiecutter.project_name }}
+# {{project_name }}
 
-{{ cookiecutter.description }}
+{{description }}
 
-[![CI](https://img.shields.io/badge/GitHub-Actions-blue)]({{ cookiecutter.repository_provider }}/{{ cookiecutter.repository_username }}/{{ cookiecutter.project_slug }}/actions)
-[![Python {{ cookiecutter.python_version }}+](https://img.shields.io/badge/python-{{ cookiecutter.python_version }}+-blue.svg)](https://www.python.org/downloads/)
+[![CI](https://img.shields.io/badge/GitHub-Actions-blue)]({{repository_provider }}/{{repository_username }}/{{project_slug }}/actions)
+[![Python {{python_version }}+](https://img.shields.io/badge/python-{{python_version }}+-blue.svg)](https://www.python.org/downloads/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 ## 概述
@@ -18,14 +18,14 @@
 - 📝 **rich** - 美观的日志和终端输出
 - 🪝 **pre-commit** - 提交前检查
 - 🔄 **CI/CD** - GitHub Actions
-{% if cookiecutter.add_api -%}
+{% if add_api -%}
 - 🚀 **FastAPI** - Web 开发示例
 {% endif %}
 
 ## 快速开始
 
 **前置要求：**
-- Python {{ cookiecutter.python_version }}+
+- Python {{python_version }}+
 - [uv](https://github.com/astral-sh/uv)
 
 ```bash
@@ -46,12 +46,12 @@ python scripts/check.py
 ## 项目结构
 
 ```
-{{ cookiecutter.project_slug }}/
-├── src/{{ cookiecutter.package_name }}/
+{{project_slug }}/
+├── src/{{package_name }}/
 │   ├── __init__.py
 │   ├── core.py
 │   ├── logger.py
-{% if cookiecutter.add_api -%}
+{% if add_api -%}
 │   ├── api.py
 {% endif %}
 │   └── main.py
@@ -72,13 +72,13 @@ ruff format .             # 格式化
 ### 测试
 ```bash
 pytest
-pytest --cov=src/{{ cookiecutter.package_name }}
+pytest --cov=src/{{package_name }}
 ```
 
-{% if cookiecutter.add_api -%}
+{% if add_api -%}
 ### FastAPI 开发
 ```bash
-python -m {{ cookiecutter.package_name }}.api
+python -m {{package_name }}.api
 ```
 {% endif %}
 
@@ -91,6 +91,6 @@ python -m {{ cookiecutter.package_name }}.api
 
 ## 许可证
 
-{{ cookiecutter.license }}
+{{license }}
 
-Copyright © {{ cookiecutter.copyright_date }} {{ cookiecutter.author_name }}
+Copyright © {{copyright_date }} {{author_name }}

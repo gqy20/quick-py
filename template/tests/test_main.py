@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 import pytest
 
-from {{ cookiecutter.package_name }}.main import demo_basic_features, demo_logging, demo_rich_output, main
+from {{package_name }}.main import demo_basic_features, demo_logging, demo_rich_output, main
 
 
 def test_main_runs_successfully(capsys):
@@ -12,7 +12,7 @@ def test_main_runs_successfully(capsys):
     main()
     captured = capsys.readouterr()
     # 检查预期的输出元素
-    assert "{{ cookiecutter.project_name }}" in captured.out or len(captured.out) > 0
+    assert "{{project_name }}" in captured.out or len(captured.out) > 0
 
 
 def test_demo_basic_features(capsys):
@@ -33,7 +33,7 @@ def test_demo_logging(capsys):
     # 验证日志产生了输出
 
 
-@patch("{{ cookiecutter.package_name }}.main.greet")
+@patch("{{package_name }}.main.greet")
 def test_main_calls_greet(mock_greet):
     """测试主函数是否调用了 greet 函数。"""
     mock_greet.return_value = "模拟的问候"
@@ -44,7 +44,7 @@ def test_main_calls_greet(mock_greet):
 
 def test_main_handles_exceptions():
     """测试主函数是否正确处理异常。"""
-    with patch("{{ cookiecutter.package_name }}.main.demo_basic_features") as mock_demo:
+    with patch("{{package_name }}.main.demo_basic_features") as mock_demo:
         mock_demo.side_effect = RuntimeError("测试错误")
         with pytest.raises(RuntimeError):
             main()

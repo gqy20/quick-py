@@ -1,10 +1,10 @@
-"""{{ cookiecutter.package_name }} 应用程序的主入口"""
+"""{{package_name }} 应用程序的主入口"""
 
 from rich.panel import Panel
 from rich.table import Table
 
-from {{ cookiecutter.package_name }}.core import add, greet
-from {{ cookiecutter.package_name }}.logger import console, logger, print_header, print_success
+from {{package_name }}.core import add, greet
+from {{package_name }}.logger import console, logger, print_header, print_success
 
 
 def demo_basic_features() -> None:
@@ -49,7 +49,7 @@ def demo_logging() -> None:
 
     console.print(
         Panel(
-            "[bold green]日志已保存到 logs/{{ cookiecutter.project_slug }}.log[/bold green]",
+            "[bold green]日志已保存到 logs/{{project_slug }}.log[/bold green]",
             title="日志文件位置",
             border_style="blue",
         )
@@ -60,7 +60,7 @@ def main() -> None:
     """运行主程序"""
     console.print(
         Panel.fit(
-            "[bold cyan]{{ cookiecutter.project_name }}[/bold cyan] - {{ cookiecutter.description }}",
+            "[bold cyan]{{project_name }}[/bold cyan] - {{description }}",
             border_style="cyan",
         )
     )

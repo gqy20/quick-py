@@ -17,14 +17,14 @@ class LoggerConfig:
     """日志系统配置类"""
 
     DEFAULT_LOG_DIR = Path("logs")
-    DEFAULT_LOG_FILE = "{{ cookiecutter.project_slug }}.log"
+    DEFAULT_LOG_FILE = "{{project_slug }}.log"
     DEFAULT_LEVEL = logging.INFO
     DEFAULT_FORMAT = "%(message)s"
     FILE_FORMAT = "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
 
 
 def setup_logger(
-    name: str = "{{ cookiecutter.package_name }}",
+    name: str = "{{package_name }}",
     level: int = LoggerConfig.DEFAULT_LEVEL,
     log_to_file: bool = True,
     log_dir: Optional[Path] = None,
@@ -38,7 +38,7 @@ def setup_logger(
         level: 日志级别 (例如: logging.INFO, logging.DEBUG)
         log_to_file: 是否记录到文件
         log_dir: 日志文件目录，默认为 'logs/'
-        log_file: 日志文件名，默认为 '{{ cookiecutter.project_slug }}.log'
+        log_file: 日志文件名，默认为 '{{project_slug }}.log'
 
     返回:
         配置好的日志记录器实例
@@ -78,7 +78,7 @@ def setup_logger(
     return logger
 
 
-def get_logger(name: str = "{{ cookiecutter.package_name }}") -> logging.Logger:
+def get_logger(name: str = "{{package_name }}") -> logging.Logger:
     """
     获取或创建日志记录器实例
 

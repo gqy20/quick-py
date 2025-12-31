@@ -2,7 +2,7 @@
 
 import pytest
 
-from {{ cookiecutter.package_name }}.core import add, greet
+from {{package_name }}.core import add, greet
 
 
 class TestGreet:
