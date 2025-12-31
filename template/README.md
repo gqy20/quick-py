@@ -2,11 +2,7 @@
 
 {{ cookiecutter.description }}
 
-{% if cookiecutter.ci_provider == 'github' -%}
-[![CI](https://img.shields.io/badge/{{ cookiecutter.ci_provider }}-Actions-blue)]({{ cookiecutter.repository_provider }}/{{ cookiecutter.repository_username }}/{{ cookiecutter.project_slug }}/actions)
-{% elif cookiecutter.ci_provider == 'gitlab' -%}
-[![CI](https://img.shields.io/badge/{{ cookiecutter.ci_provider }}-CI-orange)]({{ cookiecutter.repository_provider }}/{{ cookiecutter.repository_username }}/{{ cookiecutter.project_slug }}/pipelines)
-{% endif -%}
+[![CI](https://img.shields.io/badge/GitHub-Actions-blue)]({{ cookiecutter.repository_provider }}/{{ cookiecutter.repository_username }}/{{ cookiecutter.project_slug }}/actions)
 [![Python {{ cookiecutter.python_version }}+](https://img.shields.io/badge/python-{{ cookiecutter.python_version }}+-blue.svg)](https://www.python.org/downloads/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
@@ -21,7 +17,7 @@
 - ✅ **pytest** - 测试框架
 - 📝 **rich** - 美观的日志和终端输出
 - 🪝 **pre-commit** - 提交前检查
-- 🔄 **CI/CD** - {{ cookiecutter.ci_provider|capitalize }} Actions
+- 🔄 **CI/CD** - GitHub Actions
 {% if cookiecutter.add_api -%}
 - 🚀 **FastAPI** - Web 开发示例
 {% endif %}

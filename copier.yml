@@ -121,16 +121,6 @@ add_cli:
   default: false
   help: 是否添加 CLI 示例
 
-# ====== CI/CD ======
-ci_provider:
-  type: str
-  default: github
-  help: CI/CD 提供商
-  choices:
-    GitHub CI: github
-    GitLab CI: gitlab
-    None: none
-
 # ====== 代码规范 ======
 line_length:
   type: int
