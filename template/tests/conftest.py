@@ -1,10 +1,8 @@
 """pytest 的配置和 fixture。"""
 
 import os
-import sys
 import tempfile
 from pathlib import Path
-from unittest.mock import patch
 
 import pytest
 
@@ -102,7 +100,6 @@ def mock_console():
             from {{package_name}}.logger import print_success
             print_success("操作成功")
     """
-    from io import StringIO
     from unittest.mock import Mock
 
     mock_console = Mock()
