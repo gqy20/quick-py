@@ -5,6 +5,8 @@
 [![CI](https://img.shields.io/badge/GitHub-Actions-blue)]({{repository_provider }}/{{repository_username }}/{{project_slug }}/actions)
 [![Python {{python_version }}+](https://img.shields.io/badge/python-{{python_version }}+-blue.svg)](https://www.python.org/downloads/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![codecov](https://codecov.io/gh/{{repository_username}}/{{project_slug}}/branch/main/graph/badge.svg)](https://codecov.io/gh/{{repository_username}}/{{project_slug}})
+[![type checking](https://img.shields.io/badge/mypy-checked-blue.svg)](https://mypy.readthedocs.io/)
 
 ## 概述
 
@@ -67,12 +69,13 @@ python scripts/check.py
 ```bash
 ruff check .              # 代码检查
 ruff format .             # 格式化
+mypy src/{{package_name}} # 类型检查
 ```
 
 ### 测试
 ```bash
 pytest
-pytest --cov=src/{{package_name }}
+pytest --cov=src/{{package_name}}
 ```
 
 {% if add_api -%}
