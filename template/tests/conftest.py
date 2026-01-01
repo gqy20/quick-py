@@ -46,6 +46,7 @@ def temp_dir():
     yield Path(path)
     # 递归删除目录
     import shutil
+
     shutil.rmtree(path, ignore_errors=True)
 
 
